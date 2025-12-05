@@ -1,0 +1,110 @@
+# ----------------------------------------
+# Python
+# ----------------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.so
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyd
+*.pyo
+*$py.class
+
+# C extensions
+*.so
+
+# ----------------------------------------
+# Environments
+# ----------------------------------------
+heart_env/
+venv/
+env/
+.venv/
+
+# Conda
+*.conda
+*.ipynb_checkpoints
+
+# ----------------------------------------
+# Jupyter Notebook
+# ----------------------------------------
+.ipynb_checkpoints
+.jupyter/
+
+# ----------------------------------------
+# Streamlit
+# ----------------------------------------
+.streamlit/
+.streamlit/secrets.toml
+
+# ----------------------------------------
+# Data files
+# DO NOT IGNORE YOUR ACTUAL DATASET if needed
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.pq
+*.json
+
+# If you want to include specific files, unignore like:
+# !framingham.csv
+
+# ----------------------------------------
+# Models
+# ----------------------------------------
+*.pkl
+*.joblib
+*.sav
+*.h5
+
+# ----------------------------------------
+# Logs
+# ----------------------------------------
+*.log
+logs/
+*.out
+*.err
+
+# ----------------------------------------
+# Cache
+# ----------------------------------------
+.cache/
+*.cache
+*.pytest_cache
+__pycache__
+
+# ----------------------------------------
+# IDE / Editor ignores
+# ----------------------------------------
+.vscode/
+.idea/
+*.iml
+
+# ----------------------------------------
+# Docker
+# ----------------------------------------
+docker-compose.override.yml
+*.pid
+*.swp
+*.swo
+
+# ----------------------------------------
+# Build
+# ----------------------------------------
+build/
+dist/
+*.egg-info/
+.eggs
+MANIFEST
+
+# ----------------------------------------
+# Mac / Linux / Windows junk
+# ----------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
