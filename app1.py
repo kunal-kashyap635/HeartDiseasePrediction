@@ -25,6 +25,9 @@ templates = Jinja2Templates(directory="templates")
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+@app.get("/health")
+def health():
+    return {"Author": "Kunal kashyap", "Version": "1.0.0", "status": "API Running."}
 
 @app.post("/predict")
 def predict(patient: Patient):
