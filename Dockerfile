@@ -1,20 +1,13 @@
 FROM python:3.11.9-slim
 
-WORKDIR /app
+WORKDIR /app1
 
 COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . /app
-
-# ---- FIX WINDOWS CRLF FULLY BY REWRITING FILE ----
-RUN rm -f /app/start.sh && \
-    printf '#!/bin/bash\n\nuvicorn app:app --host 0.0.0.0 --port 8000 &\n\nstreamlit run heartstream.py --server.port=8501 --server.address=0.0.0.0\n\nwait\n' > /app/start.sh
-
-RUN chmod +x /app/start.sh
+COPY . /app1
 
 EXPOSE 8000
-EXPOSE 8501
 
-CMD ["./start.sh"]
+CMD ["uvicorn", "app1:app", "--host", "0.0.0.0", "--port", "8000"]

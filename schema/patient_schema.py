@@ -16,3 +16,4 @@ class Patient(BaseModel):
     BMI: float
     heartRate: float
     glucose: float
+    

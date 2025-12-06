@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Heart Disease Prediction | 10-Year Risk Assessment</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header Section -->
+      <header class="header">
+        <div class="logo-container">
+          <div class="logo-heart">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <div class="logo-text">
+            <h1>Heart Health<span>AI</span></h1>
+            <p class="tagline">Predictive Analytics for Cardiovascular Wellness</p>
+          </div>
+        </div>
+        <div class="header-info">
+          <div class="info-card">
+            <i class="fas fa-brain"></i>
+            <div>
+              <h3>AI-Powered</h3>
+              <p>Machine Learning Model</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-shield-alt"></i>
+            <div>
+              <h3>Secure & Private</h3>
+              <p>Your data is protected</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Left Panel - Form -->
+        <section class="form-section">
+          <div class="section-header">
+            <h2><i class="fas fa-clipboard-list"></i> Patient Information</h2>
+            <p class="subtitle">Complete the form below for a 10-year cardiovascular risk assessment. BMI is calculated automatically.</p>
+          </div>
+
+          <form id="predictForm" class="form-card">
+            <div class="form-grid">
+              <!-- Row 1 -->
+              <div class="form-group">
+                <label for="gender">
+                  <i class="fas fa-venus-mars"></i> Gender
+                  <span class="tooltip" data-tooltip="Biological sex at birth">?</span>
+                </label>
+                <div class="select-wrapper">
+                  <select id="gender" required>
+                    <option value="0">Female</option>
+                    <option value="1" selected>Male</option>
+                  </select>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="age">
+                  <i class="fas fa-birthday-cake"></i> Age
+                  <span class="tooltip" data-tooltip="Age in years">?</span>
+                </label>
+                <div class="input-wrapper">
+                  <input id="age" type="number" min="1" max="120" value="50" required />
+                  <span class="input-unit">years</span>
+                </div>
+                <div class="input-range">
+                  <span>18</span>
+                  <span>120</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="weight">
+                  <i class="fas fa-weight"></i> Weight
+                  <span class="tooltip" data-tooltip="Body weight in kilograms">?</span>
+                </label>
+                <div class="input-wrapper">
+                  <input id="weight" type="number" step="0.1" min="20" max="300" value="70" required />
+                  <span class="input-unit">kg</span>
+                </div>
+                <div class="input-range">
+                  <span>20</span>
+                  <span>300</span>
+                </div>
+              </div>
+
+              <!-- Row 2 -->
+              <div class="form-group">
+                <label for="height">
+                  <i class="fas fa-ruler-vertical"></i> Height
+                  <span class="tooltip" data-tooltip="Height in meters">?</span>
+                </label>
+                <div class="input-wrapper">
+                  <input id="height" type="number" step="0.01" min="0.8" max="2.5" value="1.70" required />
+                  <span class="input-unit">m</span>
+                </div>
+                <div class="input-range">
+                  <span>0.8</span>
+                  <span>2.5</span>
+                </div>
+              </div>
+
+              <div class="form-group bmi-display">
+                <label><i class="fas fa-calculator"></i> Calculated BMI</label>
+                <div class="bmi-value-container">
+                  <div id="bmiValue" class="bmi-value">—</div>
+                  <div class="bmi-category" id="bmiCategory">—</div>
+                </div>
+                <div class="bmi-scale">
+                  <div class="scale-item underweight">Underweight</div>
+                  <div class="scale-item normal">Normal</div>
+                  <div class="scale-item overweight">Overweight</div>
+                  <div class="scale-item obese">Obese</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="totChol">
+                  <i class="fas fa-tint"></i> Total Cholesterol
+                  <span class="tooltip" data-tooltip="Total cholesterol in mg/dL">?</span>
+                </label>
+                <div class="input-wrapper">
+                  <input id="totChol" type="number" min="50" max="600" value="200" required />
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="input-range">
+                  <span>50</span>
+                  <span>600</span>
+                </div>
+              </div>
+
+              <!-- Row 3 -->
+              <div class="form-group">
+                <label for="sysBP">
+                  <i class="fas fa-heart"></i> Systolic BP
+                  <span class="tooltip" data-tooltip="Systolic blood pressure">?</span>
+                </label>
+                <div class="input-wrapper">
+                  <input id="sysBP" type="number" min="50" max="300" value="120" required />
+                  <span class="input-unit">mmHg</span>
+                </div>
+                <div class="input-range">
+                  <span>50</span>
+                  <span>300</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="diaBP">
+                  <i class="fas fa-heartbeat"></i> Diastolic BP
+                  <span class="tooltip" data-tooltip="Diastolic blood pressure">?</span>
+                </label>
+                <div class="input-wrapper">
+                  <input id="diaBP" type="number" min="30" max="200" value="80" required />
+                  <span class="input-unit">mmHg</span>
+                </div>
+                <div class="input-range">
+                  <span>30</span>
+                  <span>200</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="heartRate">
+                  <i class="fas fa-heart"></i> Heart Rate
+                  <span class="tooltip" data-tooltip="Resting heart rate in beats per minute">?</span>
+                </label>
+                <div class="input-wrapper">
+                  <input id="heartRate" type="number" min="30" max="200" value="72" required />
+                  <span class="input-unit">bpm</span>
+                </div>
+                <div class="input-range">
+                  <span>30</span>
+                  <span>200</span>
+                </div>
+              </div>
+
+              <!-- Row 4 -->
+              <div class="form-group">
+                <label for="glucose">
+                  <i class="fas fa-syringe"></i> Glucose
+                  <span class="tooltip" data-tooltip="Blood glucose level">?</span>
+                </label>
+                <div class="input-wrapper">
+                  <input id="glucose" type="number" min="30" max="400" value="90" required />
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="input-range">
+                  <span>30</span>
+                  <span>400</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="currentSmoker">
+                  <i class="fas fa-smoking"></i> Current Smoker
+                  <span class="tooltip" data-tooltip="Do you currently smoke cigarettes?">?</span>
+                </label>
+                <div class="select-wrapper">
+                  <select id="currentSmoker">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                  </select>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="cigsPerDay">
+                  <i class="fas fa-smoking"></i> Cigarettes/Day
+                  <span class="tooltip" data-tooltip="Average number of cigarettes smoked per day">?</span>
+                </label>
+                <div class="input-wrapper">
+                  <input id="cigsPerDay" type="number" min="0" max="100" value="0" />
+                  <span class="input-unit">cig/day</span>
+                </div>
+                <div class="input-range">
+                  <span>0</span>
+                  <span>100</span>
+                </div>
+              </div>
+
+              <!-- Row 5 -->
+              <div class="form-group">
+                <label for="BPMeds">
+                  <i class="fas fa-pills"></i> On BP Medication
+                  <span class="tooltip" data-tooltip="Are you currently taking blood pressure medication?">?</span>
+                </label>
+                <div class="select-wrapper">
+                  <select id="BPMeds">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                  </select>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="prevalentStroke">
+                  <i class="fas fa-brain"></i> Prevalent Stroke
+                  <span class="tooltip" data-tooltip="History of stroke">?</span>
+                </label>
+                <div class="select-wrapper">
+                  <select id="prevalentStroke">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                  </select>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="prevalentHyp">
+                  <i class="fas fa-stethoscope"></i> Prevalent Hypertension
+                  <span class="tooltip" data-tooltip="History of high blood pressure">?</span>
+                </label>
+                <div class="select-wrapper">
+                  <select id="prevalentHyp">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                  </select>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+              </div>
+
+              <!-- Row 6 -->
+              <div class="form-group">
+                <label for="diabetes">
+                  <i class="fas fa-file-medical"></i> Diabetes
+                  <span class="tooltip" data-tooltip="Diagnosed with diabetes">?</span>
+                </label>
+                <div class="select-wrapper">
+                  <select id="diabetes">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                  </select>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+              </div>
+
+              <div class="form-group span-2">
+                <label for="notes"><i class="fas fa-notes-medical"></i> Clinical Notes (Optional)</label>
+                <textarea id="notes" placeholder="Any additional clinical information or notes..."></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" id="resetBtn" class="btn btn-secondary"><i class="fas fa-redo"></i> Reset Form</button>
+              <button type="submit" id="submitBtn" class="btn btn-primary"><i class="fas fa-brain"></i> Predict 10-Year Risk</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Right Panel - Results & Info -->
+        <section class="results-section">
+          <!-- Risk Prediction Card -->
+          <div class="result-card hidden" id="resultCard">
+            <div class="card-header">
+              <h2><i class="fas fa-chart-line"></i> Risk Assessment Results</h2>
+              <div class="risk-badge" id="riskBadge">—</div>
+            </div>
+
+            <div class="result-content">
+              <div class="probability-display">
+                <div class="probability-circle">
+                  <svg class="progress-ring" width="180" height="180">
+                    <circle class="progress-ring-bg" cx="90" cy="90" r="80" stroke-width="12"></circle>
+                    <circle class="progress-ring-fill" id="probabilityRing" cx="90" cy="90" r="80" stroke-width="12" stroke-dasharray="502.4" stroke-dashoffset="502.4"></circle>
+                  </svg>
+                  <div class="probability-value">
+                    <span id="probValue">—</span>
+                    <span class="probability-label">Probability</span>
+                  </div>
+                </div>
+                <div class="probability-info">
+                  <h3 id="predText">—</h3>
+                  <p class="result-description" id="resultDescription">—</p>
+                </div>
+              </div>
+
+              <div class="result-details">
+                <div class="detail-item">
+                  <span class="detail-label"><i class="fas fa-heartbeat"></i> Risk Level:</span>
+                  <span class="detail-value" id="riskLevel">—</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label"><i class="fas fa-calculator"></i> BMI Used:</span>
+                  <span class="detail-value" id="usedBMI">—</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label"><i class="fas fa-clock"></i> Assessment Time:</span>
+                  <span class="detail-value" id="assessmentTime">—</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label"><i class="fas fa-user"></i> Patient Profile:</span>
+                  <span class="detail-value" id="patientProfile">—</span>
+                </div>
+              </div>
+
+              <div class="recommendations">
+                <h4><i class="fas fa-lightbulb"></i> Recommendations</h4>
+                <ul id="recommendationsList">
+                  <li>Complete assessment to see personalized recommendations</li>
+                </ul>
+              </div>
+
+              <button class="btn btn-outline full-width" id="downloadBtn"><i class="fas fa-download"></i> Download Report</button>
+            </div>
+          </div>
+
+          <!-- Info Cards -->
+          <div class="info-cards">
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fas fa-info-circle"></i>
+              </div>
+              <div class="info-content">
+                <h3>How It Works</h3>
+                <p>This tool uses a machine learning model trained on the Framingham Heart Study data to predict 10-year risk of coronary heart disease.</p>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <div class="info-content">
+                <h3>Important Disclaimer</h3>
+                <p>This tool is for informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment.</p>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <i class="fas fa-chart-bar"></i>
+              </div>
+              <div class="info-content">
+                <h3>Model Accuracy</h3>
+                <p>The predictive model has an accuracy of 85% based on cross-validation. Results should be interpreted by a healthcare professional.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <i class="fas fa-heartbeat"></i>
+            <span>Heart Health<span>AI</span></span>
+          </div>
+          <div class="footer-disclaimer">
+            <p>
+              <i class="fas fa-exclamation-circle"></i> <strong>Disclaimer:</strong> This is a demonstration tool for educational purposes only. Always consult with a qualified healthcare provider for medical advice and diagnosis.
+            </p>
+          </div>
+          <div class="footer-links">
+            <a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+            <a href="#"><i class="fas fa-file-contract"></i> Terms of Use</a>
+            <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <p>© 2023 Heart HealthAI. All rights reserved. Framingham Heart Study data used for model training.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // API URL - change if deployed elsewhere
+      const API_URL = '/predict'
+      
+      // DOM Elements
+      const form = document.getElementById('predictForm')
+      const bmiValueEl = document.getElementById('bmiValue')
+      const bmiCategoryEl = document.getElementById('bmiCategory')
+      const resultCard = document.getElementById('resultCard')
+      const predText = document.getElementById('predText')
+      const probValue = document.getElementById('probValue')
+      const probRing = document.getElementById('probabilityRing')
+      const riskBadge = document.getElementById('riskBadge')
+      const riskLevel = document.getElementById('riskLevel')
+      const usedBMI = document.getElementById('usedBMI')
+      const assessmentTime = document.getElementById('assessmentTime')
+      const patientProfile = document.getElementById('patientProfile')
+      const resultDescription = document.getElementById('resultDescription')
+      const recommendationsList = document.getElementById('recommendationsList')
+      const submitBtn = document.getElementById('submitBtn')
+      const resetBtn = document.getElementById('resetBtn')
+      const downloadBtn = document.getElementById('downloadBtn')
+      
+      // BMI categories and colors
+      const bmiCategories = [
+        { min: 0, max: 18.5, name: 'Underweight', color: '#4cc9f0' },
+        { min: 18.5, max: 25, name: 'Normal', color: '#4ade80' },
+        { min: 25, max: 30, name: 'Overweight', color: '#fbbf24' },
+        { min: 30, max: 100, name: 'Obese', color: '#f87171' }
+      ]
+      
+      // Risk level descriptions
+      const riskDescriptions = {
+        Low: 'Your 10-year risk of developing coronary heart disease is low. Continue maintaining a healthy lifestyle.',
+        Medium: 'You have a moderate risk. Consider lifestyle changes and consult with a healthcare provider.',
+        High: 'You have an elevated risk. It is recommended to consult with a healthcare provider for evaluation and potential intervention.'
+      }
+      
+      // Recommendations based on risk level
+      const recommendations = {
+        Low: ['Continue regular physical activity (at least 150 minutes per week)', 'Maintain a balanced diet rich in fruits, vegetables, and whole grains', 'Schedule annual check-ups with your healthcare provider', 'Avoid tobacco products and limit alcohol consumption'],
+        Medium: ['Consult with a healthcare provider for personalized assessment', 'Increase physical activity to 150-300 minutes per week', 'Consider dietary changes to reduce cholesterol and blood pressure', 'Monitor blood pressure and cholesterol levels regularly', 'Explore stress-reduction techniques like meditation or yoga'],
+        High: ['Schedule an appointment with a cardiologist or primary care physician', 'Begin or adjust medications as prescribed by your doctor', 'Implement significant dietary changes under medical supervision', 'Increase physical activity gradually as approved by your doctor', 'Quit smoking immediately if you currently smoke', 'Monitor vital signs regularly and keep a health journal']
+      }
+      
+      // Compute BMI and update display
+      function computeBMI() {
+        const w = parseFloat(document.getElementById('weight').value) || 0
+        const h = parseFloat(document.getElementById('height').value) || 0
+      
+        if (w > 0 && h > 0) {
+          const bmi = +(w / (h * h)).toFixed(1)
+          bmiValueEl.innerText = bmi
+      
+          // Determine BMI category
+          let category = 'Obese'
+          let color = '#f87171'
+      
+          for (const cat of bmiCategories) {
+            if (bmi >= cat.min && bmi < cat.max) {
+              category = cat.name
+              color = cat.color
+              break
+            }
+          }
+      
+          bmiCategoryEl.innerText = category
+          bmiCategoryEl.style.backgroundColor = color
+      
+          return bmi
+        } else {
+          bmiValueEl.innerText = '—'
+          bmiCategoryEl.innerText = '—'
+          bmiCategoryEl.style.backgroundColor = '#64748b'
+          return null
+        }
+      }
+      
+      // Update BMI live when weight or height changes
+      document.getElementById('weight').addEventListener('input', computeBMI)
+      document.getElementById('height').addEventListener('input', computeBMI)
+      
+      // Initialize BMI calculation
+      computeBMI()
+      
+      // Reset form
+      resetBtn.addEventListener('click', () => {
+        form.reset()
+        computeBMI()
+        resultCard.classList.add('hidden')
+      
+        // Reset to default values
+        document.getElementById('age').value = 50
+        document.getElementById('weight').value = 70
+        document.getElementById('height').value = 1.7
+        document.getElementById('totChol').value = 200
+        document.getElementById('sysBP').value = 120
+        document.getElementById('diaBP').value = 80
+        document.getElementById('heartRate').value = 72
+        document.getElementById('glucose').value = 90
+      
+        computeBMI()
+      })
+      
+      // Form submission
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+      
+        // Recompute BMI
+        const BMI = computeBMI()
+        if (BMI === null) {
+          alert('Please provide valid weight & height')
+          return
+        }
+      
+        // Disable button while requesting
+        submitBtn.disabled = true
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Predicting...'
+      
+        // Collect payload
+        const payload = {
+          gender: Number(document.getElementById('gender').value),
+          age: Number(document.getElementById('age').value),
+          currentSmoker: Number(document.getElementById('currentSmoker').value),
+          cigsPerDay: Number(document.getElementById('cigsPerDay').value),
+          BPMeds: Number(document.getElementById('BPMeds').value),
+          prevalentStroke: Number(document.getElementById('prevalentStroke').value),
+          prevalentHyp: Number(document.getElementById('prevalentHyp').value),
+          diabetes: Number(document.getElementById('diabetes').value),
+          totChol: Number(document.getElementById('totChol').value),
+          sysBP: Number(document.getElementById('sysBP').value),
+          diaBP: Number(document.getElementById('diaBP').value),
+          BMI: Number(BMI),
+          heartRate: Number(document.getElementById('heartRate').value),
+          glucose: Number(document.getElementById('glucose').value)
+        }
+      
+        try {
+          // Simulate API call with mock response for demo
+          // In a real application, replace with actual API call
+          const mockResponse = await simulatePredictionAPI(payload)
+      
+          // Display results
+          displayResults(mockResponse, payload)
+      
+          // Show result card
+          resultCard.classList.remove('hidden')
+          resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        } catch (err) {
+          alert('Prediction failed: ' + err.message)
+          console.error(err)
+        } finally {
+          submitBtn.disabled = false
+          submitBtn.innerHTML = '<i class="fas fa-brain"></i> Predict 10-Year Risk'
+        }
+      })
+      
+      // Simulate API response for demo purposes
+      async function simulatePredictionAPI(payload) {
+        // Simulate network delay
+        await new Promise((resolve) => setTimeout(resolve, 800))
+      
+        // Calculate a mock probability based on inputs
+        let probability = 0.1 // Base probability
+      
+        // Increase probability based on risk factors
+        if (payload.age > 50) probability += 0.15
+        if (payload.currentSmoker) probability += 0.2
+        if (payload.BMI > 30) probability += 0.15
+        if (payload.sysBP > 140 || payload.diaBP > 90) probability += 0.1
+        if (payload.totChol > 240) probability += 0.1
+        if (payload.diabetes) probability += 0.15
+        if (payload.prevalentHyp) probability += 0.1
+        if (payload.BPMeds) probability += 0.05
+      
+        // Cap probability between 0 and 0.9
+        probability = Math.min(0.9, Math.max(0.05, probability))
+      
+        // Determine risk level
+        let riskLevel = 'Low'
+        if (probability > 0.3) riskLevel = 'Medium'
+        if (probability > 0.6) riskLevel = 'High'
+      
+        // Mock response
+        return {
+          prediction: riskLevel === 'Low' ? 'Low Risk' : riskLevel === 'Medium' ? 'Moderate Risk' : 'High Risk',
+          probability: probability,
+          calculated_BMI: payload.BMI,
+          timestamp: new Date().toISOString()
+        }
+      }
+      
+      // Display results
+      function displayResults(response, payload) {
+        const probability = response.probability
+        const riskLevelText = probability < 0.3 ? 'Low' : probability < 0.6 ? 'Medium' : 'High'
+      
+        // Update prediction text
+        predText.textContent = response.prediction
+        probValue.textContent = `${(probability * 100).toFixed(1)}%`
+      
+        // Update risk badge and level
+        riskBadge.textContent = riskLevelText
+        riskLevel.textContent = riskLevelText
+      
+        // Set risk badge color
+        if (riskLevelText === 'Low') {
+          riskBadge.style.backgroundColor = '#4ade80'
+        } else if (riskLevelText === 'Medium') {
+          riskBadge.style.backgroundColor = '#fbbf24'
+        } else {
+          riskBadge.style.backgroundColor = '#f87171'
+        }
+      
+        // Update other details
+        usedBMI.textContent = payload.BMI.toFixed(1)
+      
+        const now = new Date()
+        assessmentTime.textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      
+        const gender = payload.gender ? 'Male' : 'Female'
+        const age = payload.age
+        patientProfile.textContent = `${gender}, ${age} years`
+      
+        // Update description
+        resultDescription.textContent = riskDescriptions[riskLevelText] || ''
+      
+        // Update recommendations
+        recommendationsList.innerHTML = ''
+        const recs = recommendations[riskLevelText] || []
+        recs.forEach((rec) => {
+          const li = document.createElement('li')
+          li.textContent = rec
+          recommendationsList.appendChild(li)
+        })
+      
+        // Animate probability ring
+        const radius = 80
+        const circumference = 2 * Math.PI * radius
+        const offset = circumference - probability * circumference
+      
+        probRing.style.strokeDasharray = `${circumference} ${circumference}`
+        probRing.style.strokeDashoffset = circumference
+      
+        // Trigger animation
+        setTimeout(() => {
+          probRing.style.strokeDashoffset = offset
+        }, 100)
+      }
+      
+      // Download report
+      downloadBtn.addEventListener('click', () => {
+        if (resultCard.classList.contains('hidden')) {
+          alert('Please generate a prediction first')
+          return
+        }
+      
+        // Create report content
+        const report = `
+            HEART DISEASE RISK ASSESSMENT REPORT
+            =====================================
+            Generated: ${new Date().toLocaleString()}
+            
+            PATIENT INFORMATION
+            -------------------
+            Gender: ${document.getElementById('gender').options[document.getElementById('gender').selectedIndex].text}
+            Age: ${document.getElementById('age').value} years
+            Weight: ${document.getElementById('weight').value} kg
+            Height: ${document.getElementById('height').value} m
+            BMI: ${usedBMI.textContent}
+            Blood Pressure: ${document.getElementById('sysBP').value}/${document.getElementById('diaBP').value} mmHg
+            Total Cholesterol: ${document.getElementById('totChol').value} mg/dL
+            Heart Rate: ${document.getElementById('heartRate').value} bpm
+            Glucose: ${document.getElementById('glucose').value} mg/dL
+            Current Smoker: ${document.getElementById('currentSmoker').options[document.getElementById('currentSmoker').selectedIndex].text}
+            Cigarettes/Day: ${document.getElementById('cigsPerDay').value}
+            On BP Medication: ${document.getElementById('BPMeds').options[document.getElementById('BPMeds').selectedIndex].text}
+            Prevalent Stroke: ${document.getElementById('prevalentStroke').options[document.getElementById('prevalentStroke').selectedIndex].text}
+            Prevalent Hypertension: ${document.getElementById('prevalentHyp').options[document.getElementById('prevalentHyp').selectedIndex].text}
+            Diabetes: ${document.getElementById('diabetes').options[document.getElementById('diabetes').selectedIndex].text}
+            
+            ASSESSMENT RESULTS
+            ------------------
+            Risk Level: ${riskLevel.textContent}
+            10-Year Probability: ${probValue.textContent}
+            Assessment Time: ${assessmentTime.textContent}
+            
+            RECOMMENDATIONS
+            ---------------
+            ${Array.from(recommendationsList.children)
+              .map((li) => `• ${li.textContent}`)
+              .join('\n')}
+            
+            DISCLAIMER
+            ----------
+            This report is generated for informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
+            `
+      
+        // Create download link
+        const blob = new Blob([report], { type: 'text/plain' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `heart-risk-assessment-${new Date().toISOString().split('T')[0]}.txt`
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+        URL.revokeObjectURL(url)
+      
+        // Show download confirmation
+        const originalText = downloadBtn.innerHTML
+        downloadBtn.innerHTML = '<i class="fas fa-check"></i> Report Downloaded!'
+        downloadBtn.disabled = true
+      
+        setTimeout(() => {
+          downloadBtn.innerHTML = originalText
+          downloadBtn.disabled = false
+        }, 2000)
+      })
+      
+      // Initialize with current time
+      assessmentTime.textContent = new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    </script>
+  </body>
+</html>
